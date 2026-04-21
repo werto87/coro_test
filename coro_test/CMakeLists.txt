@@ -33,6 +33,11 @@ set_target_properties(
         CXX_VISIBILITY_PRESET hidden
         VISIBILITY_INLINES_HIDDEN YES)
 
+target_compile_definitions(coro_test PUBLIC
+  BOOST_ASIO_ENABLE_HANDLER_TRACKING
+)
+
+
 install(FILES
         hello.hxx
         DESTINATION include/coro_test
