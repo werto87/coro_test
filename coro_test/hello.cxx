@@ -6,7 +6,7 @@ namespace coro_test
 {
 
 boost::asio::awaitable<void>
-helloWorldEvery10Seconds ()
+helloWorldEvery5Seconds ()
 {
   spdlog::info ("while (true)");
   while (true)
@@ -24,7 +24,7 @@ helloWorldEvery10Seconds ()
 void
 printSomething (boost::asio::io_context &io_context)
 {
-  spdlog::info ("boost::asio::co_spawn (io_context, helloWorldEvery10Seconds (io_context), boost::asio::detached);");
-  boost::asio::co_spawn (io_context, helloWorldEvery10Seconds (), boost::asio::detached);
+  spdlog::info ("boost::asio::co_spawn (io_context, helloWorldEvery5Seconds (), boost::asio::detached);");
+  boost::asio::co_spawn (io_context, helloWorldEvery5Seconds (), boost::asio::detached);
 }
 }
