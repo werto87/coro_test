@@ -18,6 +18,7 @@ public:
   ~CoroTest ();
 
   void printSomething ();
+  void shutdown ();
 
   std::unique_ptr<std::thread> thread;
   std::unique_ptr<boost::asio::io_context> ioContext;
