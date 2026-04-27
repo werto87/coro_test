@@ -3,8 +3,12 @@
 #include <print>
 #include <spdlog/spdlog.h>
 
+
 namespace coro_test
 {
+
+CoroTest::CoroTest () : ioContext{ std::make_unique<boost::asio::io_context> () } {}
+CoroTest::~CoroTest () = default;
 
 boost::asio::awaitable<void>
 helloWorldEvery5Seconds ()
@@ -22,13 +26,13 @@ helloWorldEvery5Seconds ()
     }
 }
 
-CoroTest::CoroTest () : ioContext{ std::make_unique<boost::asio::io_context> () } {}
+
 
 void
 CoroTest::printSomething ()
 {
-  thread = std::make_unique<std::thread> ([this] () { ioContext->run (); });
   spdlog::info ("boost::asio::co_spawn (*ioContext.get (), helloWorldEvery5Seconds (), boost::asio::detached);");
   boost::asio::co_spawn (*ioContext.get (), helloWorldEvery5Seconds (), boost::asio::detached);
+  thread = std::make_unique<std::thread> ([this] () { ioContext->run (); });
 }
 }

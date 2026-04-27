@@ -4,8 +4,9 @@
 int
 main ()
 {
-  // boost::asio::io_context io_context;
-  // coro_test::printSomething (io_context);
-  // io_context.run ();
+  coro_test::CoroTest coro_test;
+  coro_test.printSomething ();
+  while (1)
+    ;
   return 0;
 }

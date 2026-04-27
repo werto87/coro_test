@@ -19,10 +19,11 @@ class CoroTest
 {
 public:
   CoroTest ();
+  ~CoroTest ();
 
   void printSomething ();
 
-  std::unique_ptr<std::thread> thread{};
-  std::unique_ptr<boost::asio::io_context> ioContext{};
+  std::unique_ptr<std::thread> thread;
+  std::unique_ptr<boost::asio::io_context> ioContext;
 };
 }
