@@ -1,11 +1,7 @@
 #pragma once
 
 #include <memory>
-
-namespace std
-{
-class thread;
-}
+#include <thread>
 
 namespace boost::asio
 {
