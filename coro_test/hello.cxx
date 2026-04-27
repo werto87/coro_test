@@ -1,4 +1,5 @@
 #include "hello.hxx"
+#include <boost/asio.hpp>
 #include <print>
 #include <spdlog/spdlog.h>
 
@@ -21,10 +22,13 @@ helloWorldEvery5Seconds ()
     }
 }
 
+CoroTest::CoroTest () : ioContext{ std::make_unique<boost::asio::io_context> () } {}
+
 void
-printSomething (boost::asio::io_context &io_context)
+CoroTest::printSomething ()
 {
-  spdlog::info ("boost::asio::co_spawn (io_context, helloWorldEvery5Seconds (), boost::asio::detached);");
-  boost::asio::co_spawn (io_context, helloWorldEvery5Seconds (), boost::asio::detached);
+  thread = std::make_unique<std::thread> ([this] () { ioContext->run (); });
+  spdlog::info ("boost::asio::co_spawn (*ioContext.get (), helloWorldEvery5Seconds (), boost::asio::detached);");
+  boost::asio::co_spawn (*ioContext.get (), helloWorldEvery5Seconds (), boost::asio::detached);
 }
 }
